@@ -21,6 +21,7 @@ resources:
       type: github
       name: IITCC/helm-user-mgt
       ref: refs/heads/main
+      endpoint: github-service
 
 jobs:
   - job: cloud_user_mgt_deployment
