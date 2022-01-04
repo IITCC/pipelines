@@ -1,0 +1,26 @@
+# -------------------------------------------------------------------------------------
+#
+# Copyright (c) 2020, WSO2 Inc. (http://www.wso2.com). All Rights Reserved.
+#
+# This software is the property of WSO2 Inc. and its suppliers, if any.
+# Dissemination of any information or reproduction of any material contained
+# herein in any form is strictly forbidden, unless permitted by WSO2 expressly.
+# You may not alter or remove any copyright or other notice from copies of this content.
+#
+# --------------------------------------------------------------------------------------
+
+parameters:
+- name: 'REPO_PATH'
+  type: string
+- name: 'VARIABLE_NAME'
+  type: string
+steps:
+  - script: |
+      set -e
+      pushd ${{ parameters.REPO_PATH }}
+         branch=$(git describe --tags)
+         echo "##vso[task.setvariable variable=${{ parameters.VARIABLE_NAME }};isOutput=true;]${branch}"
+         echo ${branch}
+      popd
+    displayName: 'Setting the branch name to a var'
+    name: set_variable_for_branch_name

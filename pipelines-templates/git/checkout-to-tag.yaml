@@ -1,0 +1,32 @@
+# -------------------------------------------------------------------------------------
+#
+# Copyright (c) 2021, WSO2 Inc. (http://www.wso2.com). All Rights Reserved.
+#
+# This software is the property of WSO2 Inc. and its suppliers, if any.
+# Dissemination of any information or reproduction of any material contained
+# herein in any form is strictly forbidden, unless permitted by WSO2 expressly.
+# You may not alter or remove any copyright or other notice from copies of this content.
+#
+# --------------------------------------------------------------------------------------
+
+parameters:
+  - name: 'REPO_PATH'
+    type: string
+  - name: 'TAG_TO_CHECKOUT'
+    type: string
+
+steps:
+  - script: |
+
+      git -C ${{ parameters.REPO_PATH }} checkout ${{ parameters.TAG_TO_CHECKOUT }}
+      checkedout_tag=$(git -C ${{ parameters.REPO_PATH }} describe --tags)
+      echo "Checkedout tag: " $checkedout_tag
+      echo "Required tag to checkout: " ${{ parameters.TAG_TO_CHECKOUT }}
+
+      if [ $checkedout_tag != ${{ parameters.TAG_TO_CHECKOUT }} ]
+      then
+        echo "Tags do not match each other!"
+        exit 1
+      fi
+    displayName: Checkout to tag
+    name: checkout_to_tag

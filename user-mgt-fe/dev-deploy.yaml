@@ -1,0 +1,34 @@
+parameters:
+  - name: PIPELINE_TEMPLATE_DIR
+    type: string
+    default: '../pipelines-templates'
+
+jobs:
+  - job: cloud_user_mgt_deployment
+    displayName: Cloud User Management Deployment
+    workspace:
+      clean: all
+    steps:
+    - checkout: self
+    - checkout: helm-user-mgt
+      path: $(HELM_REPO_DIR)
+    - template: ${{ parameters.PIPELINE_TEMPLATE_DIR }}/git/checkout-to-tag.yaml
+      parameters:
+        REPO_PATH: $(Agent.BuildDirectory)/$(HELM_REPO_DIR)
+        TAG_TO_CHECKOUT: $(HELM_VERSION)
+    - template: ${{ parameters.PIPELINE_TEMPLATE_DIR }}/helm/install.yaml
+
+      displayName: Sed the values yaml
+    - task: HelmDeploy@0
+      displayName: 'Helm install the chart'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: $(KUBERNETES_SERVICE_CONNECTION)
+        namespace: $(NAMESPACE)
+        command: 'upgrade'
+        chartType: 'FilePath'
+        chartPath: '$(Agent.BuildDirectory)/$(HELM_REPO_DIR)'
+        releaseName: 'user-mgt'
+        valueFile: '$(Agent.BuildDirectory)/$(HELM_REPO_DIR)/values.yaml'
+        waitForExecution: false
+

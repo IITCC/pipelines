@@ -1,0 +1,43 @@
+# -------------------------------------------------------------------------------------
+#
+# Copyright (c) 2021, WSO2 Inc. (http://www.wso2.com). All Rights Reserved.
+#
+# This software is the property of WSO2 Inc. and its suppliers, if any.
+# Dissemination of any information or reproduction of any material contained
+# herein in any form is strictly forbidden, unless permitted by WSO2 expressly.
+# You may not alter or remove any copyright or other notice from copies of this content.
+#
+# --------------------------------------------------------------------------------------
+
+variables:
+  PIPELINE_TEMPLATE_DIR: '../../pipelines-templates'
+  KUBERNETES_SERVICE_CONNECTION: 'asgardeo-aks'
+  HELM_REPO_DIR: 'helm-repo-dir'
+  IMAGE_REPOSITORY_NAME: 'asgardeo/website'
+  CONTAINER_REGISTRY_IDENTIFIER: 'acrasgardeomainshared001.azurecr.io'
+  IS_USERNAME: 'asgardeo-website'
+  CONSOLE_HOST: 'https://dev.console.asgardeo.io'
+  INGRESS_HOST_NAME: 'dev.asgardeointernal.site'
+  NAMESPACE: 'iam-cloud'
+  REPLICA_COUNT: '2'
+  PREFINARY_POST_URL: "https://i.prefinery.com/projects/18iidz4y/users/post"
+  PREFINARY_JAVASCRIPT_SNIPPET_URL: "https://widget.prefinery.com/widget/v2/18iidz4y.js"
+  RECAPTCHA_SITE_KEY: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+  VWO_ACCOUNT_ID: "550839"
+  IMAGE_SHA:            sha256:7d4d6285c1e269c5c9461b91a5a873b5f99800faaa65184a6e54345906fbb2df
+  WEBSITE_VERSION: v0.1.19.316
+  WEBSITE_HOST: "https://dev.asgardeo.io"
+  HELM_VERSION: 'v0.2.77'
+  IS_HOST: "https://dev.api.asgardeo.io"
+  APPLICATION_INSIGHTS_ENABLED: 'true'
+  APPLICATION_INSIGHTS_INSTRUMENTATION_KEY: '34fbd533-d8f9-4586-8b7d-28e42c929abb'
+  APPLICATION_INSIGHTS_PROXY_ENDPOINT: ''
+  APPLICATION_INSIGHTS_COOKIE_DOMAIN: '.asgardeo.io'
+  APPLICATION_INSIGHTS_COOKIE_POSTFIX: '_dev'
+  LANDING_REDIRECT_URL: 'https://wso2.com/asgardeo/'
+  # Tomcat Docker hub image: tomcat:8.5.73-jre11-temurin-focal
+  TOMCAT_IMAGE_DIGEST: 'sha256:271bb967e41dafd2c7e7cd00c0113f3a8ecdcfd14244c0503ac738f4cb9a72aa'
+  ACR_ARM_SERVICE_CONNECTION: 'asgardeo-acr'
+  ACR_IMAGE_STATE_FILE: 'acr-dev-locked-image-tags.txt'
+  ACR_IMAGE_RETENTION_PERIOD_IN_MONTHS: '12'
+
