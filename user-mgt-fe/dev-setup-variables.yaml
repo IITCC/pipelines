@@ -5,6 +5,6 @@ variables:
   HELM_REPO_DIR: 'helm-repo-dir'
   IMAGE_REPOSITORY_NAME: 'asgardeo/website'
   CONTAINER_REGISTRY_IDENTIFIER: 'acrasgardeomainshared001.azurecr.io'
-  HELM_VERSION: 'v0.2.77'
+  HELM_VERSION: 'v1.0.1'
 
 
