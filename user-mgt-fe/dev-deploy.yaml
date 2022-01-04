@@ -2,7 +2,7 @@ trigger:
   batch: true
   branches:
     include:
-      - dev-001
+      - dev
   paths:
     include:
       - user-mgt-fe/dev-deploy.yaml
