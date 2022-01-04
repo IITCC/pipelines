@@ -36,7 +36,6 @@ jobs:
         REPO_PATH: $(Agent.BuildDirectory)/$(HELM_REPO_DIR)
         TAG_TO_CHECKOUT: $(HELM_VERSION)
     - template: ${{ parameters.PIPELINE_TEMPLATE_DIR }}/helm/install.yaml
-      displayName: Sed the values yaml
     - task: HelmDeploy@0
       displayName: 'Helm install the chart'
       inputs:
