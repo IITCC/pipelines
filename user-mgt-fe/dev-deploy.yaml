@@ -10,6 +10,9 @@ trigger:
 
 pr: none
 
+variables:
+  - template: ./dev-setup-variables.yaml
+
 parameters:
   - name: PIPELINE_TEMPLATE_DIR
     type: string
