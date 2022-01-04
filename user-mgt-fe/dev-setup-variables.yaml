@@ -1,10 +1,9 @@
 
 variables:
   PIPELINE_TEMPLATE_DIR: '../../pipelines-templates'
-  KUBERNETES_SERVICE_CONNECTION: 'asgardeo-aks'
-  HELM_REPO_DIR: 'helm-repo-dir'
-  IMAGE_REPOSITORY_NAME: 'asgardeo/website'
-  CONTAINER_REGISTRY_IDENTIFIER: 'acrasgardeomainshared001.azurecr.io'
+  KUBERNETES_SERVICE_CONNECTION: 'k8s-cluster'
+  HELM_REPO_DIR: 'helm-user-mgt'
   HELM_VERSION: 'v1.0.1'
+  NAMESPACE: 'cloud-computing'
 
 
