@@ -22,9 +22,9 @@ parameters:
 
 resources:
   repositories:
-    - repository: helm-user-mgt-fe
+    - repository: helm-user-mgt
       type: github
-      name: IITCC/helm-user-mgt-fe
+      name: IITCC/helm-user-mgt
       ref: refs/heads/main
       endpoint: github-service
 
@@ -35,7 +35,7 @@ jobs:
       clean: all
     steps:
     - checkout: self
-    - checkout: helm-user-mgt-fe
+    - checkout: helm-user-mgt
       path: $(HELM_REPO_DIR)
     - template: ${{ parameters.PIPELINE_TEMPLATE_DIR }}/git/checkout-to-tag.yaml
       parameters:
@@ -51,7 +51,7 @@ jobs:
         command: 'upgrade'
         chartType: 'FilePath'
         chartPath: '$(Agent.BuildDirectory)/$(HELM_REPO_DIR)'
-        releaseName: 'user-mgt-fe'
+        releaseName: 'user-mgt'
         valueFile: '$(Agent.BuildDirectory)/$(HELM_REPO_DIR)/values.yaml'
         waitForExecution: false
 
