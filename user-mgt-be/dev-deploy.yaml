@@ -5,8 +5,8 @@ trigger:
       - dev
   paths:
     include:
-      - user-mgt-fe/dev-deploy.yaml
-      - user-mgt-fe/dev-setup-variables.yaml
+      - user-mgt-be/dev-deploy.yaml
+      - user-mgt-be/dev-setup-variables.yaml
 
 pr: none
 
