@@ -1,0 +1,57 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - dev
+  paths:
+    include:
+      - user-mgt-fe/dev-deploy.yaml
+      - user-mgt-fe/dev-setup-variables.yaml
+
+pr: none
+
+pool: 'pipelines-pool'
+
+variables:
+  - template: ./dev-setup-variables.yaml
+
+parameters:
+  - name: PIPELINE_TEMPLATE_DIR
+    type: string
+    default: '../pipelines-templates'
+
+resources:
+  repositories:
+    - repository: helm-user-mgt-fe
+      type: github
+      name: IITCC/helm-user-mgt-fe
+      ref: refs/heads/main
+      endpoint: github-service
+
+jobs:
+  - job: cloud_user_mgt_deployment
+    displayName: Cloud User Management Deployment
+    workspace:
+      clean: all
+    steps:
+    - checkout: self
+    - checkout: helm-user-mgt-fe
+      path: $(HELM_REPO_DIR)
+    - template: ${{ parameters.PIPELINE_TEMPLATE_DIR }}/git/checkout-to-tag.yaml
+      parameters:
+        REPO_PATH: $(Agent.BuildDirectory)/$(HELM_REPO_DIR)
+        TAG_TO_CHECKOUT: $(HELM_VERSION)
+    - template: ${{ parameters.PIPELINE_TEMPLATE_DIR }}/helm/install.yaml
+    - task: HelmDeploy@0
+      displayName: 'Helm install the chart'
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: $(KUBERNETES_SERVICE_CONNECTION)
+        namespace: $(NAMESPACE)
+        command: 'upgrade'
+        chartType: 'FilePath'
+        chartPath: '$(Agent.BuildDirectory)/$(HELM_REPO_DIR)'
+        releaseName: 'user-mgt-fe'
+        valueFile: '$(Agent.BuildDirectory)/$(HELM_REPO_DIR)/values.yaml'
+        waitForExecution: false
+
