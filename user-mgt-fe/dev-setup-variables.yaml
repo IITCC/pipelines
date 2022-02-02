@@ -3,7 +3,7 @@ variables:
   PIPELINE_TEMPLATE_DIR: '../../pipelines-templates'
   KUBERNETES_SERVICE_CONNECTION: 'stage-k8s-cluster'
   HELM_REPO_DIR: 'helm-user-mgt'
-  HELM_VERSION: 'v1.0.6'
+  HELM_VERSION: 'v1.0.15'
   NAMESPACE: 'cloud-computing'
 
 
